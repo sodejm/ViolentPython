@@ -1,5 +1,6 @@
+#still needs some fixing to remove the need to ctrl-c at the end of the scan
+
 import optparse
-import socket
 from socket import *
 
 
@@ -18,13 +19,13 @@ def connScan(tgtHost, tgtPort):
 
 def portScan(tgtHost, tgtPorts):
     try:
-        tgtIP = gethostbyname(tgtHost)
+        tgtHost = gethostbyname(tgtHost)
     except:
         print ("[-] Cannot resolve '%s': Unknown host" % tgtHost)
         setdefaulttimeout(1)
-        for tgtPort in tgtPorts:
-            print 'Scanning port ' + tgtPort
-            connScan(tgtHost, int(tgtPort))
+    for tgtPort in tgtPorts:
+        print 'Scanning port ' + tgtPort
+        connScan(tgtHost, int(tgtPort))
 
 
 def main():
@@ -34,10 +35,12 @@ def main():
     (options, args) = parser.parse_args()
     tgtHost = options.tgtHost
     tgtPorts = str(options.tgtPort).split(',')
-    if (tgtHost == None) | (tgtPorts[0] == None):
+    if (tgtHost is None) | (tgtPorts[0] is None):
         print('[-] You must specify a target host and port[s].')
         exit(0)
+
     portScan(tgtHost, tgtPorts)
+
 
 
 if __name__ == '__main__':
