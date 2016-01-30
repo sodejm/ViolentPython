@@ -23,11 +23,11 @@ def portScan(tgtHost, tgtPorts):
         print ("[-] Cannot resolve '%s': Unknown host" % tgtHost)
         setdefaulttimeout(1)
         for tgtPort in tgtPorts:
-            print 'Scanning port' + tgtPort
+            print 'Scanning port ' + tgtPort
             connScan(tgtHost, int(tgtPort))
 
 
-def main()
+def main():
     parser = optparse.OptionParser("usage%prog" + " -H <target host> -p <target port>")
     parser.add_option('-H', dest='tgtHost', type='string', help='specify target host')
     parser.add_option('-p', dest='tgtPort', type='string', help='specify target port[s] separated by comma')
@@ -37,7 +37,7 @@ def main()
     if (tgtHost == None) | (tgtPorts[0] == None):
         print('[-] You must specify a target host and port[s].')
         exit(0)
-    portscan(tgtHost, tgtPorts)
+    portScan(tgtHost, tgtPorts)
 
 
 if __name__ == '__main__':
