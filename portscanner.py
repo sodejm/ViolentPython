@@ -24,8 +24,10 @@ def portScan(tgtHost, tgtPorts):
         print ("[-] Cannot resolve '%s': Unknown host" % tgtHost)
         setdefaulttimeout(1)
     for tgtPort in tgtPorts:
-        print 'Scanning port ' + tgtPort
-        connScan(tgtHost, int(tgtPort))
+        t = Thread(target=connScan, args=(tgtHost, int(tgtPort)))
+        t.start()
+        #print 'Scanning port ' + tgtPort
+        #connScan(tgtHost, int(tgtPort))
 
 
 def main():
